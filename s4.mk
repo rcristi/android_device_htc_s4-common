@@ -28,8 +28,7 @@ PRODUCT_PACKAGES += \
 
 # Qualcomm scripts
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/init.qcom.bt.sh:/system/etc/init.qcom.bt.sh \
-    $(LOCAL_PATH)/configs/init.qcom.fm.sh:/system/etc/init.qcom.fm.sh
+    $(LOCAL_PATH)/configs/init.qcom.bt.sh:/system/etc/init.qcom.bt.sh
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -77,6 +76,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.wireless=WCN3660 \
     ro.qualcomm.bt.hci_transport=smd \
     ro.vendor.extension_library=/system/vendor/lib/libqc-opt.so
+# fmradio support
+PRODUCT_PACKAGES += \
+    qcom.fmradio \
+    libqcomfm_jni \
+    FM2 \
+    FMRecord
+
+# transmitter isn't supported
+PRODUCT_PROPERTY_OVERRIDES += \
+	ro.fm.transmitter=false
 
 # call the proprietary setup
 $(call inherit-product-if-exists, vendor/htc/s4-common/s4-common-vendor.mk)
